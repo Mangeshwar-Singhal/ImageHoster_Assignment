@@ -1,5 +1,6 @@
 package ImageHoster.repository;
 
+import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import ImageHoster.model.User;
 import org.springframework.stereotype.Repository;
@@ -112,4 +113,16 @@ public class ImageRepository {
         }
     }
 
+    public void postComment(Comment comment) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            em.persist(comment);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
+    }
 }
