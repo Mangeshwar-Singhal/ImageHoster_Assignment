@@ -204,17 +204,4 @@ public class ImageController {
 
         return tagString.toString();
     }
-
-    @RequestMapping(value = "/image/{imageId}/{imageTitle}/comments", method = RequestMethod.POST)
-    public String postComment(@PathVariable("imageId") Integer imageId, @PathVariable("imageTitle") String imageTitle, @RequestParam("comment") String commentText, HttpSession session){
-        User user = (User) session.getAttribute("loggeduser");
-        Image image = imageService.getImage(imageId);
-        Comment comment = new Comment();
-        comment.setText(commentText);
-        comment.setCreatedDate(LocalDate.now());
-        comment.setImage(image);
-        comment.setUser(user);
-        imageService.postComment(comment);
-        return "redirect:/images/"+imageId;
-    }
 }
