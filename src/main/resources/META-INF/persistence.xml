@@ -21,6 +21,14 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- update -->
             <property name="hibernate.show_sql" value="true"/> <!-- Show SQL in console -->
             <property name="hibernate.format_sql" value="true"/> <!-- Show SQL formatted -->
+            <property name="hibernate.connection.autocommit" value="true" />
+
+            <!-- Configuring Connection Pool -->
+            <property name="hibernate.c3p0.min_size" value="5" />
+            <property name="hibernate.c3p0.max_size" value="200" />
+            <property name="hibernate.c3p0.timeout" value="500" />
+            <property name="hibernate.c3p0.max_statements" value="50" />
+            <property name="hibernate.c3p0.idle_test_period" value="2000" />
 
 
         </properties>
