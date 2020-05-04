@@ -39,7 +39,7 @@ public class ImageController {
 
     //This method is called when the details of the specific image with corresponding title are to be displayed
     //The logic is to get the image from the databse with corresponding title. After getting the image from the database the details are shown
-    //First receive the dynamic parameter in the incoming request URL in a string variable 'imageId' and also the Model type object
+    //First receive the dynamic parameters in the incoming request URL in string variables 'imageId', 'imageTitle' and also the Model type object
     //Call the getImageByTitle() method in the business logic to fetch all the details of that image
     //Add the image in the Model type object with 'image' as the key
     //Return 'images/image.html' file
@@ -47,8 +47,8 @@ public class ImageController {
     //Also now you need to add the tags of an image in the Model type object
     //Here a list of tags is added in the Model type object
     //this list is then sent to 'images/image.html' file and the tags are displayed
-    @RequestMapping("/images/{imageId}")
-    public String showImage(@PathVariable("imageId") Integer imageId, Model model) {
+    @RequestMapping("/images/{imageId}/{imageTitle}")
+    public String showImage(@PathVariable("imageId") Integer imageId, @PathVariable("imageTitle") String imageTitle, Model model) {
         Image image = imageService.getImage(imageId);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
@@ -97,8 +97,8 @@ public class ImageController {
     @RequestMapping(value = "/editImage")
     public String editImage(@RequestParam("imageId") Integer imageId, HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggeduser");
-        Image image = imageService.getImageByIdAndUser(imageId, user.getId());
-        if(image != null){
+        Image image = imageService.getImage(imageId);
+        if(user.getId().equals(image.getUser().getId())){
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
             model.addAttribute("tags", tags);
@@ -106,7 +106,7 @@ public class ImageController {
         } else {
             String error = "Only the owner of the image can edit the image";
             model.addAttribute("editError", error);
-            return showImage(imageId, model);
+            return showImage(imageId, "", model);
         }
     }
 
@@ -141,7 +141,7 @@ public class ImageController {
         updatedImage.setDate(new Date());
 
         imageService.updateImage(updatedImage);
-        return "redirect:/images/" + updatedImage.getId();
+        return "redirect:/images/" + updatedImage.getId()+"/"+updatedImage.getTitle();
     }
 
 
@@ -151,14 +151,14 @@ public class ImageController {
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggeduser");
-        Image image = imageService.getImageByIdAndUser(imageId, user.getId());
-        if(image != null){
+        Image image = imageService.getImage(imageId);
+        if(user.getId().equals(image.getUser().getId())){
             imageService.deleteImage(imageId);
             return "redirect:/images";
         } else {
             String error = "Only the owner of the image can delete the image";
             model.addAttribute("deleteError", error);
-            return showImage(imageId, model);
+            return showImage(imageId, "", model);
         }
     }
 

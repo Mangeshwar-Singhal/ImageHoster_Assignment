@@ -28,8 +28,8 @@ public class ImageService {
 
 
     //The method calls the getImageByTitle() method in the Repository and passes the title of the image to be fetched
-    public Image getImageByIdAndUser(Integer imageId, Integer userId) {
-        return imageRepository.getImageByIdAndUser(imageId, userId);
+    public Image getImageByTitle(Integer imageId, String imageTitle) {
+        return imageRepository.getImageByTitle(imageId, imageTitle);
     }
 
     //The method calls the getImage() method in the Repository and passes the id of the image to be fetched
