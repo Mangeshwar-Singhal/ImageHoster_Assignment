@@ -15,6 +15,8 @@ public class HomeController {
     @Autowired
     private ImageService imageService;
 
+    //This method acts as the landing/Home page controller of the application
+    //The logic is to fetch all the image posts from the database and list of images is passed in model with key as "images"
     @RequestMapping("/")
     public String getAllImages(Model model) {
         List<Image> images = imageService.getAllImages();

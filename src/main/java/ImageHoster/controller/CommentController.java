@@ -24,6 +24,11 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    //This method is called when the user post a comment
+    //The logic is to save the comment into the database with corresponding values. After persisting the comment into database image details are shown
+    //First receive the dynamic parameters in the incoming request URL in string variables 'imageId', 'imageTitle', 'commentText' and httpSession object
+    //Call the postComment() method in the business logic to save the comment
+    //then control is redirected to 'images/{imageId}/{imageTitle}'
     @RequestMapping(value = "/image/{imageId}/{imageTitle}/comments", method = RequestMethod.POST)
     public String postComment(@PathVariable("imageId") Integer imageId, @PathVariable("imageTitle") String imageTitle, @RequestParam("comment") String commentText, HttpSession session){
         User user = (User) session.getAttribute("loggeduser");
