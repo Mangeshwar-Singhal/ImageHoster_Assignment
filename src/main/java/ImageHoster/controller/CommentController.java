@@ -34,6 +34,6 @@ public class CommentController {
         comment.setImage(image);
         comment.setUser(user);
         commentService.postComment(comment);
-        return "redirect:/images/"+imageId;
+        return "redirect:/images/"+imageId+"/"+imageTitle;
     }
 }

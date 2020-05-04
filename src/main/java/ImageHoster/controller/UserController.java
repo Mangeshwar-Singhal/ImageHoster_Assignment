@@ -48,7 +48,7 @@ public class UserController {
         Pattern specialCharPatten = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         if(alphabetPatten.matcher(password).find() && digitCasePatten.matcher(password).find() && specialCharPatten.matcher(password).find()){
             userService.registerUser(user);
-            return "redirect:/users/login";
+            return "users/login";
         } else {
             String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
             model.addAttribute("passwordTypeError", error);
