@@ -5,6 +5,7 @@ import ImageHoster.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//The annotation is a special type of @Component annotation which describes that the class defines a data service
 @Service
 public class UserService {
 

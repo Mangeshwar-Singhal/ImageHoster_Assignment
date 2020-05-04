@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//The annotation is a special type of @Component annotation which describes that the class defines a data service
 @Service
 public class ImageService {
     @Autowired
@@ -21,7 +22,7 @@ public class ImageService {
     }
 
 
-    //The method calls the createImage() method in the Repository and passes the image to be persisted in the database
+    //The method calls the uploadImage() method in the Repository and passes the image to be persisted in the database
     public void uploadImage(Image image) {
         imageRepository.uploadImage(image);
     }

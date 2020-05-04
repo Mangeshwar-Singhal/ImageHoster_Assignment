@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 @Configuration
 public class JpaConfig {
 
+    //This method provide the instance of EntityManagerFactory as Spring bean
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
@@ -19,6 +20,8 @@ public class JpaConfig {
         return emfb.getObject();
     }
 
+
+    //This method provide the instance of DataSource as Spring bean
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
