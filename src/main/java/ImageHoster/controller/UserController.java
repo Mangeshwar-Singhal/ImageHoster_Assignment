@@ -44,9 +44,9 @@ public class UserController {
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user, Model model) {
         String password = user.getPassword();
-        Pattern alphabetPatten = Pattern.compile("[a-z ]");
-        Pattern digitCasePatten = Pattern.compile("[0-9 ]");
-        Pattern specialCharPatten = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern alphabetPatten = Pattern.compile("[a-zA-Z]");
+        Pattern digitCasePatten = Pattern.compile("[0-9]");
+        Pattern specialCharPatten = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE);
         if(alphabetPatten.matcher(password).find() && digitCasePatten.matcher(password).find() && specialCharPatten.matcher(password).find()){
             userService.registerUser(user);
             return "users/login";
